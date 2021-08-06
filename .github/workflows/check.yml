@@ -31,4 +31,6 @@ jobs:
           GROUPME_BOT: ${{ secrets.GROUPME_BOT }}
           GROUPME_KEY: ${{ secrets.GROUPME_KEY }}
           GCP_SA: ${{ secrets.GCP_SA }}
-        run: python -m ufcevents
+        run: |
+          ls
+          python -m ufcevents
