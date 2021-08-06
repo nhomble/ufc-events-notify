@@ -33,13 +33,14 @@ if __name__ == '__main__':
                 db.collection(_collection).document(s).set(data)
                 new_cards.add(k)
 
-        full = []
-        for n in new_cards:
-            nice_date = n.strftime("%B %d")
-            link = real_dates[n]["link"]
-            full.append(f"There is a new UFC event scheduled: {nice_date}\nMore info here: {link}")
+        if new_cards:
+            full = []
+            for n in new_cards:
+                nice_date = n.strftime("%B %d")
+                link = real_dates[n]["link"]
+                full.append(f"There is a new UFC event scheduled: {nice_date}\nMore info here: {link}")
 
-        full = "\n---".join(full)
+            full = "\n---".join(full)
 
-        groupme = Client.from_token(api_key)
-        groupme.bots.post(bot_id, full)
+            groupme = Client.from_token(api_key)
+            groupme.bots.post(bot_id, full)
