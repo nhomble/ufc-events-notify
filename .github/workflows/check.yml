@@ -33,4 +33,5 @@ jobs:
           GCP_SA: ${{ secrets.GCP_SA }}
         run: |
           ls
+          python ufcevents/__init__.py
           python -m ufcevents
