@@ -26,6 +26,11 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9    
       - name: Send GroupMe notification
         env:
           GROUPME_BOT: ${{ secrets.GROUPME_BOT }}
@@ -33,5 +38,4 @@ jobs:
           GCP_SA: ${{ secrets.GCP_SA }}
         run: |
           ls
-          python ufcevents/__init__.py
           python -m ufcevents
