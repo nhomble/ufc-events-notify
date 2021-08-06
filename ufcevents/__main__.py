@@ -13,8 +13,7 @@ if __name__ == '__main__':
 
     bot_id = os.getenv("GROUPME_BOT")
     api_key = os.getenv("GROUPME_KEY")
-    cert64 = os.getenv("GCP_SA")
-    cert = base64.b64decode(cert64).decode('ascii')
+    cert = os.getenv("GCP_SA")
     with open('sa.json', 'w') as f:
         f.write(cert)
         f.flush()
@@ -40,7 +39,7 @@ if __name__ == '__main__':
                 link = real_dates[n]["link"]
                 full.append(f"There is a new UFC event scheduled: {nice_date}\nMore info here: {link}")
 
-            full = "\n---".join(full)
+            full = "\n---\n".join(full)
 
             groupme = Client.from_token(api_key)
             groupme.bots.post(bot_id, full)
