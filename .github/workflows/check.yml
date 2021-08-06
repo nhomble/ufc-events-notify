@@ -2,7 +2,7 @@ name: Notifier
 
 on:
   schedule:
-    - cron: "5 * * * *"
+    - cron: "10 * * * *"
   push:
     branches: [ main ]
 
