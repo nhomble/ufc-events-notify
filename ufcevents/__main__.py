@@ -6,8 +6,19 @@ from firebase_admin import credentials
 from firebase_admin import firestore
 from groupy.client import Client
 import os
+import hashlib
+import base64
 
 _collection = "card_events"
+
+
+def make_doc_id(card):
+    link = card["link"].encode("utf-8")
+    sha1 = hashlib.sha1(link)
+    d = sha1.digest()
+    b64 = base64.urlsafe_b64encode(d).decode()
+    return b64
+
 
 if __name__ == '__main__':
 
@@ -26,10 +37,10 @@ if __name__ == '__main__':
 
         new_cards = set()
         for k, data in real_dates.items():
-            s = k.strftime("%m-%d")
-            ref = db.collection(_collection).document(s)
+            doc_id = make_doc_id(data)
+            ref = db.collection(_collection).document(doc_id)
             if not ref.get().exists:
-                db.collection(_collection).document(s).set(data)
+                db.collection(_collection).document(doc_id).set(data)
                 new_cards.add(k)
 
         if new_cards:

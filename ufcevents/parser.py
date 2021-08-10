@@ -15,7 +15,8 @@ def _get_cards(soup):
             "title": div["data-card-event-title"],
             "date_full": div["data-main-card"],
             "date_day": div["data-main-card"].split("/")[0].strip(),
-            "link": _url + div.find('a')['href']
+            "link": _url + div.find('a')['href'],
+            "parsed_date": datetime.now().strftime("%m-%d-%Y")
         }
 
     return [_parse(div) for div in divs]
