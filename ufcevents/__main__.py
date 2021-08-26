@@ -48,7 +48,8 @@ if __name__ == '__main__':
             for n in new_cards:
                 nice_date = n.strftime("%B %d")
                 link = real_dates[n]["link"]
-                full.append(f"There is a new UFC event scheduled: {nice_date}\nMore info here: {link}")
+                title = real_dates[n]["title"]
+                full.append(f"There is a new UFC event scheduled: {nice_date}: {title}\nMore info here: {link}")
 
             full = "\n---\n".join(full)
 

@@ -4,18 +4,16 @@ import requests
 from bs4 import BeautifulSoup
 
 _url = "https://ufc.com"
-_div_card_dates = "c-card-event--result__date"
-
 
 def _get_cards(soup):
-    divs = soup.find_all("div", class_="c-card-event--result__date")
+    divs = soup.find_all("div", class_="c-card-event--result__info")
 
     def _parse(div):
         return {
-            "title": div["data-card-event-title"],
-            "date_full": div["data-main-card"],
-            "date_day": div["data-main-card"].split("/")[0].strip(),
-            "link": _url + div.find('a')['href'],
+            "title": div.find("h3").text,
+            "date_full": div.find("div")["data-main-card"],
+            "date_day": div.find("div")["data-main-card"].split("/")[0].strip(),
+            "link": _url + div.find("a")['href'],
             "parsed_date": datetime.now().strftime("%m-%d-%Y")
         }
 
