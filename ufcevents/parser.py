@@ -30,5 +30,9 @@ def get_card_events():
     dates = set()
     for card in _get_cards(soup):
         print(f"Converting card={card}")
-        dates.add(datetime.strptime(card["date_day"], "%a, %b %d"))
+        try:
+            dates.add(datetime.strptime(card["date_day"], "%a, %b %d"))
+        except RuntimeError as e:
+            print(f"Failed to convert e={e}")
+      
     return dates
