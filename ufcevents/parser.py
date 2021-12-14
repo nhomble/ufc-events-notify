@@ -27,11 +27,11 @@ def get_card_events():
     html = r.text
     soup = BeautifulSoup(html, features="html.parser")
 
-    dates = set()
+    dates = {}
     for card in _get_cards(soup):
         print(f"Converting card={card}")
         try:
-            dates.add(datetime.strptime(card["date_day"], "%a, %b %d"))
+            dates[datetime.strptime(card["date_day"], "%a, %b %d")] = card
         except Exception as e:
             print(f"Failed to convert e={e}")
       
