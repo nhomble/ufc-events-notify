@@ -27,5 +27,8 @@ def get_card_events():
     html = r.text
     soup = BeautifulSoup(html, features="html.parser")
 
-    dates = {datetime.strptime(card["date_day"], "%a, %b %d"): card for card in _get_cards(soup)}
+    dates = set()
+    for card in _get_cards(soup):
+        print(f"Converting card={card}")
+        dates.add(datetime.strptime(card["date_day"], "%a, %b %d"))
     return dates
