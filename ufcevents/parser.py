@@ -32,7 +32,7 @@ def get_card_events():
         print(f"Converting card={card}")
         try:
             dates.add(datetime.strptime(card["date_day"], "%a, %b %d"))
-        except RuntimeError as e:
+        except Exception as e:
             print(f"Failed to convert e={e}")
       
     return dates
